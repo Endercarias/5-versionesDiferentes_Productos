@@ -54,7 +54,26 @@ public class ProductController {
 		return nuevoProducto;
 	}
 	
-
+	@DeleteMapping(value = "/{id}")
+	@ResponseStatus(code = HttpStatus.ACCEPTED)
+	public void deleteProducto(@PathVariable(name = "id") Long id) {
+	repository.deleteById(id);
+	}
+	
+	@PutMapping(value = "/{id}")
+	@ResponseStatus(code = HttpStatus.ACCEPTED)
+	public Producto updateProduct(@PathVariable(name = "id") Long id, @RequestBody Producto producto) {
+		Optional<Producto> oProducto = repository.findById(id);
+		if (oProducto.isPresent()) {
+			Producto actual = oProducto.get();
+			actual.setId(id);
+			actual.setName(producto.getName());
+			actual.setPrice(producto.getPrice());
+			Producto updateProduct = repository.save(actual);
+			return updateProduct;
+		}
+		return null;
+	}
 
 		
 		
