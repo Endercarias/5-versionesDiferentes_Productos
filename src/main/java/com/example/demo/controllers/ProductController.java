@@ -54,11 +54,7 @@ public class ProductController {
 		return nuevoProducto;
 	}
 	
-	@DeleteMapping(value = "/{id}")
-	@ResponseStatus(code = HttpStatus.ACCEPTED)
-	public void deleteProducto(@PathVariable(name = "id") Long id) {
-	repository.deleteById(id);
-	}
+
 
 		
 		
