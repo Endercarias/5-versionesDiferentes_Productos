@@ -26,7 +26,26 @@ public class ProductController {
 	@Autowired
 	ProductRepository repository;
 	
+	@GetMapping
+	@ResponseStatus(code = HttpStatus.OK)
+	public Collection<Producto> getListaProductos(){
+		Iterable<Producto> listaProductos = repository.findAll();
+		
+		return (Collection<Producto>) listaProductos;
+	}
 	
+	@GetMapping(value = "/{id}")
+	@ResponseStatus(code = HttpStatus.OK)
+	public Producto getroducto(@PathVariable(name = "id") Long id) {
+		
+		Optional<Producto> producto = repository.findById(id);
+		Producto result =null;
+		if(producto.isPresent()) {
+			result = producto.get();
+		}
+		return result;
+	}
+
 
 		
 		
