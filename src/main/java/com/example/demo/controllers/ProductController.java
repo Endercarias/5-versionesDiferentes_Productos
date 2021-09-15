@@ -46,6 +46,19 @@ public class ProductController {
 		return result;
 	}
 
+	@PostMapping
+	@ResponseStatus(code = HttpStatus.CREATED)
+	public Producto createProducto(@RequestBody Producto producto) {
+		
+		Producto nuevoProducto =repository.save(producto);
+		return nuevoProducto;
+	}
+	
+	@DeleteMapping(value = "/{id}")
+	@ResponseStatus(code = HttpStatus.ACCEPTED)
+	public void deleteProducto(@PathVariable(name = "id") Long id) {
+	repository.deleteById(id);
+	}
 
 		
 		
